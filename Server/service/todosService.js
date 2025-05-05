@@ -1,7 +1,9 @@
 const db = require('../db.js');
-export function queryAllTodos () {
-    db.query('SELECT * FROM todos', (err, result) => {
-        if (err) throw err;
-        console.log("comments table created");
-        console.log("hello")    });
-}
+exports.queryAllTodos = async () => {
+    try {
+      const [rows] = await db.query('SELECT * FROM todos');
+      return rows;
+    } catch (err) {
+      throw new Error('Error fetching todos: ' + err.message);
+    }
+ };

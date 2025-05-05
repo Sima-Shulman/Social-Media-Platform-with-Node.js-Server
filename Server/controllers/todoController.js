@@ -1,5 +1,5 @@
 import {queryAllTodos} from '../service/todosService.js';
-async function getAllTodos(req, res) {
+exports.getAllTodos= async (req, res) =>{
     try {
         const todos = await queryAllTodos();
         res.status(200).json(todos);
