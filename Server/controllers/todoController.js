@@ -37,7 +37,7 @@ exports.createTodo = async (req, res) => {
 exports.updateTodo = async (req, res) => { 
     try {
         const id = req.params.id
-        const isUpdate= await putTodo(id);
+        const isUpdate= await putTodo(id, req.body);
         if (!isUpdate) {
             return res.status(404).json({ error: 'Todo with id:' + todo.id + ' not found' });
         }

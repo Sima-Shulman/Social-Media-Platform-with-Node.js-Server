@@ -37,7 +37,7 @@ exports.createPost = async (req, res) => {
 exports.updatePost = async (req, res) => {
     try {
         const id = req.params.id
-        const isUpdate = await putPost(id);
+        const isUpdate = await putPost(id, req.body);
         if (!isUpdate) {
             return res.status(404).json({ error: 'Post with id:' + post.id + ' not found' });
         }
