@@ -20,19 +20,7 @@ con.connect(function (err) {
         if (err) throw err;
         console.log("Using MyDB database");
     });
-    //   con.query("DROP TABLE todos", function (err, result) {
-    //     if (err) throw err;
-    //     console.log(" todos table deleted!");
-    // })
-    // con.query("DROP TABLE posts", function (err, result) {
-    //     if (err) throw err;
-    //     console.log(" users table deleted!");
-    // })
-    // con.query("DROP TABLE users", function (err, result) {
-    //     if (err) throw err;
-    //     console.log(" users table deleted!");
-    // })
-      //   var sql1 = `
+       //   var sql1 = `
       // CREATE TABLE users (
       //   id INT AUTO_INCREMENT UNIQUE,
       //   username VARCHAR(255) PRIMARY KEY NOT NULL,

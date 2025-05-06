@@ -1,4 +1,4 @@
-const db = require('../../DB/createDB');
+const db = require('../../modules/createDB');
 
 exports.queryAllTodos = async () => {
   try {
@@ -25,5 +25,24 @@ exports.postTodo = async ({ userId, title, completed }) => {
     return { id: result.insertId, userId, title, completed };
   } catch (err) {
     throw new Error('Error posting todo: ' + err.message);
+  }
+};
+exports.putTodo = async (id, { userId, title, completed }) => {
+  try {
+    const [result] = await db.query(
+      'UPDATE todos SET userId = ?, title = ?, completed = ? WHERE id = ?',
+      [userId, title, completed, id]
+    );
+    return result.affectedRows > 0;
+  } catch (err) {
+    throw new Error('Error updating todo: ' + err.message);
+  }
+};
+exports.deleteTodo = async (id) => {
+  try {
+    const [result] = await db.query('DELETE FROM todos WHERE id = ?', [id]);
+    return result.affectedRows > 0;
+  } catch (err) {
+    throw new Error('Error deleting todo: ' + err.message);
   }
 };
