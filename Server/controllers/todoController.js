@@ -8,7 +8,7 @@ exports.getAllTodos = async (req, res) => {
         }
         res.status(200).json(todos);
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }
 exports.getTodoById = async (req, res) => { 
@@ -20,7 +20,7 @@ exports.getTodoById = async (req, res) => {
         }
         res.status(200).json(todo);
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }
 exports.createTodo = async (req, res) => { 
@@ -31,7 +31,7 @@ exports.createTodo = async (req, res) => {
         }
         res.status(200).json(todo);
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }
 exports.updateTodo = async (req, res) => { 
@@ -43,7 +43,7 @@ exports.updateTodo = async (req, res) => {
         }
         res.status(200).json('todo'+id + ' updated');
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }
 exports.removeTodo = async (req, res) => {
@@ -55,6 +55,6 @@ exports.removeTodo = async (req, res) => {
         }
         res.status(200).json('todo'+id + ' deleted');
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }

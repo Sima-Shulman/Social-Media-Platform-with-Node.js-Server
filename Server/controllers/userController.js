@@ -7,7 +7,7 @@ const {/*queryAllUsers,*/ queryUserById, postUser, /*putUser, deleteUser*/} = re
 //         }
 //         res.status(200).json(users);
 //     } catch (error) {
-//         res.status(500).json({ error: 'Internal server error' });
+//         res.status(500).json({ error: 'Internal server error.'+error.message });
 //     }
 // }
 exports.getUserById = async (req, res) => {
@@ -19,7 +19,7 @@ exports.getUserById = async (req, res) => {
         }
         res.status(200).json(user);
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }
 exports.createUser = async (req, res) => {
@@ -30,7 +30,7 @@ exports.createUser = async (req, res) => {
         }
         res.status(200).json(user);
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }
 // exports.updateUser = async (req, res) => {
@@ -42,7 +42,7 @@ exports.createUser = async (req, res) => {
 //         }
 //         res.status(200).json('user' + id + ' updated');
 //     } catch (error) {
-//         res.status(500).json({ error: 'Internal server error' });
+//         res.status(500).json({ error: 'Internal server error.'+error.message });
 //     }
 // }
 // exports.removeUser = async (req, res) => {
@@ -54,6 +54,6 @@ exports.createUser = async (req, res) => {
 //         }
 //         res.status(200).json('user' + id + ' deleted');
 //     } catch (error) {
-//         res.status(500).json({ error: 'Internal server error' });
+//         res.status(500).json({ error: 'Internal server error.'+error.message });
 //     }
 // }

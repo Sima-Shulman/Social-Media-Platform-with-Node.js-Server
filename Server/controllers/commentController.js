@@ -8,7 +8,7 @@ exports.getAllComments = async (req, res) => {
         }
         res.status(200).json(comments);
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }
 exports.getCommentById = async (req, res) => {
@@ -20,7 +20,7 @@ exports.getCommentById = async (req, res) => {
         }
         res.status(200).json(comment);
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }
 exports.createComment = async (req, res) => {
@@ -31,7 +31,7 @@ exports.createComment = async (req, res) => {
         }
         res.status(200).json(comment);
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }
 exports.updateComment = async (req, res) => {
@@ -43,7 +43,7 @@ exports.updateComment = async (req, res) => {
         }
         res.status(200).json('comment' + id + ' updated');
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }
 exports.removeComment = async (req, res) => {
@@ -55,6 +55,6 @@ exports.removeComment = async (req, res) => {
         }
         res.status(200).json('comment' + id + ' deleted');
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }

@@ -11,6 +11,7 @@ exports.queryAllTodos = async () => {
 exports.queryTodoById = async (id) => {
   try {
     const [rows] = await db.query('SELECT * FROM todos WHERE id = ?', [id]);
+    return rows;
   } catch (err) {
     throw new Error('Error fetching todo with ID: ' + rows.id + err.message);
   }
