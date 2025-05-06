@@ -2,7 +2,7 @@ const db = require('../../modules/createDB');
 
 exports.queryAllTodos = async () => {
   try {
-    const [rows] = await db.query('SELECT * FROM todos'); // <-- await
+    const [rows] = await db.query('SELECT * FROM todos');
     return rows;
   } catch (err) {
     throw new Error('Error fetching todos: ' + err.message);
@@ -10,8 +10,7 @@ exports.queryAllTodos = async () => {
 };
 exports.queryTodoById = async (id) => {
   try {
-    const [rows] = await db.query('SELECT * FROM todos WHERE id = ?', [id]); // <-- await
-    return rows;
+    const [rows] = await db.query('SELECT * FROM todos WHERE id = ?', [id]);
   } catch (err) {
     throw new Error('Error fetching todo with ID: ' + rows.id + err.message);
   }
