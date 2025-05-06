@@ -1,5 +1,5 @@
 const express = require('express');
-const todosRoutes = require('./routes/todosRoutes');
+const todosRoutes = require('./todosRoutes');
 const app = express();
 
 app.use('/todos',todosRoutes);

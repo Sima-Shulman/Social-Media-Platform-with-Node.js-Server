@@ -1,9 +1,11 @@
-const db = require('../db.js');
-exports.queryAllTodos = async () => {
-    try {
-      const [rows] = await db.query('SELECT * FROM todos');
-      return rows;
-    } catch (err) {
-      throw new Error('Error fetching todos: ' + err.message);
-    }
- };
+const { cwd } = require('process');
+const db = require('../../DB/createDB');
+exports.queryAllTodos = () => {
+  try {
+    const [rows] = db.query('SELECT * FROM todos');
+    console.log('rows', rows);
+    return rows;
+  } catch (err) {
+    throw new Error('Error fetching todos: ' + err.message);
+  }
+};

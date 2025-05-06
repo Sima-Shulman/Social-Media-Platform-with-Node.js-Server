@@ -1,6 +1,5 @@
-import {express} from 'express';
-import {getAllTodos} from '../controllers/todoController.js';
-import { get } from 'http';
+const express = require('express');
+const { getAllTodos } = require('../controllers/todoController');
 const router =express.Router();
 
 router.get('/', getAllTodos);
