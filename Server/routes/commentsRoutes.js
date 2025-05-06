@@ -1,6 +1,6 @@
 const express = require('express');
-const { getAllComments, getCommentById, createComment, updateComment, removeComment } = require('../controllers/commentsController');
-const router = express.Router();
+const { getAllComments, getCommentById, createComment, updateComment, removeComment } = require('../controllers/commentController');
+const router = express.Router({ mergeParams: true });
 
 router.get('/', getAllComments);
 router.get('/:id', getCommentById);

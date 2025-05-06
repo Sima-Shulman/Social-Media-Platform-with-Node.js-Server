@@ -20,7 +20,11 @@ con.connect(function (err) {
         if (err) throw err;
         console.log("Using MyDB database");
     });
-    //   con.query("DROP TABLE todos", function (err, result) {
+    //   con.query("DROP TABLE comments", function (err, result) {
+    //     if (err) throw err;
+    //     console.log(" todos table deleted!");
+    // })
+    // con.query("DROP TABLE todos", function (err, result) {
     //     if (err) throw err;
     //     console.log(" todos table deleted!");
     // })
@@ -28,29 +32,33 @@ con.connect(function (err) {
     //     if (err) throw err;
     //     console.log(" users table deleted!");
     // })
-    con.query("DROP TABLE users", function (err, result) {
-        if (err) throw err;
-        console.log(" users table deleted!");
-    })
-    var sql1 = `
-      CREATE TABLE users (
-        id INT AUTO_INCREMENT PRIMARY KEY ,
-        username VARCHAR(255) UNIQUE NOT NULL,
-        email VARCHAR(255) UNIQUE)`;
-    con.query(sql1, function (err, result) {
-        if (err) throw err;
-        console.log(" users table created");
-    });
+    // con.query("DROP TABLE passwords", function (err, result) {
+    //     if (err) throw err;
+    //     console.log(" users table deleted!");
+    // })
+    // con.query("DROP TABLE users", function (err, result) {
+    //     if (err) throw err;
+    //     console.log(" users table deleted!");
+    // })
+    // var sql1 = `
+    //   CREATE TABLE users (
+    //     id INT AUTO_INCREMENT PRIMARY KEY ,
+    //     username VARCHAR(255) UNIQUE NOT NULL,
+    //     email VARCHAR(255) UNIQUE)`;
+    // con.query(sql1, function (err, result) {
+    //     if (err) throw err;
+    //     console.log(" users table created");
+    // });
 
-    var sql5 = `
-    CREATE TABLE passwords (
-        userId INT PRIMARY KEY,
-        password VARCHAR(255) NOT NULL,
-        FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE)`;
-    con.query(sql5, function (err, result) {
-        if (err) throw err;
-        console.log("users table created");
-    });
+    // var sql5 = `
+    // CREATE TABLE passwords (
+    //     userId INT PRIMARY KEY,
+    //     password VARCHAR(255) NOT NULL,
+    //     FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE)`;
+    // con.query(sql5, function (err, result) {
+    //     if (err) throw err;
+    //     console.log("users table created");
+    // });
     // var sql2 = `
     // CREATE TABLE todos (
     //   id INT AUTO_INCREMENT PRIMARY KEY ,
@@ -86,68 +94,68 @@ con.connect(function (err) {
     //       if (err) throw err;
     //       console.log("comments table created");
     //   });
-    const insertUsersAndPasswords = () => {
-        for (let i = 1; i <= 50; i++) {
-            const username = `user${i}`;
-            const email = `user${i}@example.com`;
-            const password = `pass${i}`;
+    // const insertUsersAndPasswords = () => {
+    //     for (let i = 1; i <= 50; i++) {
+    //         const username = `user${i}`;
+    //         const email = `user${i}@gmail.com`;
+    //         const password = `pass${i}`;
 
-            const sql = `INSERT INTO users (username, email) VALUES (?, ?, ?)`;
-            const sql2 = `INSERT INTO passwords (userId,password) VALUES (?,SHA2(?, 256))`;
-            con.query(sql, [username, email], (err, result) => {
-                if (err) throw err;
-                console.log(`User ${username} inserted`);
-            });
-            con.query(sql2, [i, password], (err, result) => {
-                if (err) throw err;
-                console.log(`Password for ${username} inserted`);
-            });
-        }
-    };
-    insertUsersAndPasswords();
-    const insertTodos = (con) => {
-        for (let i = 1; i <= 50; i++) {
-            const userId = Math.ceil(i / 10); // כל 10 משימות שייכות למשתמש אחר
-            const title = `Todo ${i}`;
-            const completed = i % 2 === 0; // משימות זוגיות מסומנות כבוצעו
+    //         const sql = `INSERT INTO users (username, email) VALUES (?, ?)`;
+    //         const sql2 = `INSERT INTO passwords (userId,password) VALUES (?,SHA2(?, 256))`;
+    //         con.query(sql, [username, email], (err, result) => {
+    //             if (err) throw err;
+    //             console.log(`User ${username} inserted`);
+    //         });
+    //         con.query(sql2, [i, password], (err, result) => {
+    //             if (err) throw err;
+    //             console.log(`Password for ${username} inserted`);
+    //         });
+    //     }
+    // };
+    // insertUsersAndPasswords();
+    // const insertTodos = () => {
+    //     for (let i = 1; i <= 50; i++) {
+    //         const userId = Math.ceil(i / 10); // כל 10 משימות שייכות למשתמש אחר
+    //         const title = `Todo ${i}`;
+    //         const completed = i % 2 === 0; // משימות זוגיות מסומנות כבוצעו
 
-            const sql = `INSERT INTO todos (userId, title, completed) VALUES (?, ?, ?)`;
-            con.query(sql, [userId, title, completed], (err, result) => {
-                if (err) throw err;
-                console.log(`Todo ${i} inserted`);
-            });
-        }
-    };
-    insertTodos();
-    const insertPosts = (con) => {
-        for (let i = 1; i <= 20; i++) {
-            const userId = Math.ceil(i / 5);
-            const title = `Post ${i}`;
-            const body = `This is the body of post ${i}`;
+    //         const sql = `INSERT INTO todos (userId, title, completed) VALUES (?, ?, ?)`;
+    //         con.query(sql, [userId, title, completed], (err, result) => {
+    //             if (err) throw err;
+    //             console.log(`Todo ${i} inserted`);
+    //         });
+    //     }
+    // };
+    // insertTodos();
+    // const insertPosts = () => {
+    //     for (let i = 1; i <= 20; i++) {
+    //         const userId = Math.ceil(i / 5);
+    //         const title = `Post ${i}`;
+    //         const body = `This is the body of post ${i}`;
 
-            const sql = `INSERT INTO posts (userId, title, body) VALUES (?, ?, ?)`;
-            con.query(sql, [userId, title, body], (err, result) => {
-                if (err) throw err;
-                console.log(`Post ${i} inserted`);
-            });
-        }
-    };
-    insertPosts();
-    const insertComments = (con) => {
-        for (let i = 1; i <= 100; i++) {
-            const postId = Math.ceil(i / 5); // כל 5 תגובות שייכות לפוסט אחר
-            const email = `user${Math.ceil(postId / 4)}@example.com`; // קשר בין תגובות למשתמשים
-            const title = `Comment ${i}`;
-            const body = `This is the body of comment ${i}`;
+    //         const sql = `INSERT INTO posts (userId, title, body) VALUES (?, ?, ?)`;
+    //         con.query(sql, [userId, title, body], (err, result) => {
+    //             if (err) throw err;
+    //             console.log(`Post ${i} inserted`);
+    //         });
+    //     }
+    // };
+    // insertPosts();
+    // const insertComments = () => {
+    //     for (let i = 1; i <= 100; i++) {
+    //         const postId = Math.ceil(i / 5); // כל 5 תגובות שייכות לפוסט אחר
+    //         const email = `user${Math.ceil(postId / 4)}@gmail.com`; // קשר בין תגובות למשתמשים
+    //         const title = `Comment ${i}`;
+    //         const body = `This is the body of comment ${i}`;
 
-            const sql = `INSERT INTO comments (postId, email, title, body) VALUES (?, ?, ?, ?)`;
-            con.query(sql, [postId, email, title, body], (err, result) => {
-                if (err) throw err;
-                console.log(`Comment ${i} inserted`);
-            });
-        }
-    };
-    insertComments();
+    //         const sql = `INSERT INTO comments (postId, email, title, body) VALUES (?, ?, ?, ?)`;
+    //         con.query(sql, [postId, email, title, body], (err, result) => {
+    //             if (err) throw err;
+    //             console.log(`Comment ${i} inserted`);
+    //         });
+    //     }
+    // };
+    // insertComments();
 
 
 });
