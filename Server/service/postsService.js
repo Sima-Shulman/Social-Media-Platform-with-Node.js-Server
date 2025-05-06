@@ -1,4 +1,4 @@
-const db = require('../../modules/createDB');
+const db = require('../../database/createDB');
 
 exports.queryAllPosts = async () => {
   try {
