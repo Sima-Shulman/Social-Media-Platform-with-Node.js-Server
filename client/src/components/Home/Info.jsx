@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useUser } from "../../services/UserContext";
 import ApiService from "../../services/ApiService";
-import styles from "./Info.module.css"; 
+import styles from "./Info.module.css";
 
 const Info = () => {
     const [userInfo, setUserInfo] = useState(null);
@@ -40,16 +40,10 @@ const Info = () => {
                 <strong>Username:</strong> {userInfo.username}
             </p>
             <p className={styles.infoRow}>
-                <strong>Name:</strong> {userInfo.name}
-            </p>
-            <p className={styles.infoRow}>
                 <strong>ID:</strong> {userInfo.id}
             </p>
             <p className={styles.infoRow}>
                 <strong>Email:</strong> {userInfo.email}
-            </p>
-            <p className={styles.infoRow}>
-                <strong>Phone:</strong> {userInfo.phone}
             </p>
         </div>
     );

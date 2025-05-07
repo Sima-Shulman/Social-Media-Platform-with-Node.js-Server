@@ -8,6 +8,14 @@ exports.queryAllPosts = async () => {
     throw new Error('Error fetching posts: ' + err.message);
   }
 };
+exports.queryPostByUserId = async (userId) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM posts WHERE userId = ?', [userId]);
+    return rows;
+  } catch (err) {
+    throw new Error('Error fetching posts for user with ID: ' + userId + err.message);
+  }
+}
 exports.queryPostById = async (id) => {
   try {
     const [rows] = await db.query('SELECT * FROM posts WHERE id = ?', [id]);

@@ -32,7 +32,7 @@ const Posts = () => {
                 }
                 const url = showAllPosts
                     ? "http://localhost:3000/posts"
-                    : `http://localhost:3000/posts/?userId=${currentUser.id}`;
+                    : `http://localhost:3000/posts?userId=${currentUser.id}`;
                 const data = await ApiService.request({
                     url: url,
                 });
@@ -45,18 +45,17 @@ const Posts = () => {
         fetchPosts();
     }, [currentUser?.id, showAllPosts]);
 
-    const updatePosts = (updatedPosts) => {
-        let resolvedPosts = updatedPosts;
-
-        if (typeof updatedPosts === "function") {
-            resolvedPosts = updatedPosts(posts);
-        }
+    const updatePosts = (updater) => {
         setSearchQuery("");
         setCriteria("");
-        setPosts(resolvedPosts);
-        setFilteredPosts(resolvedPosts);
-    };
-
+      
+        setPosts((prevPosts) => {
+          const newPosts = typeof updater === "function" ? updater(prevPosts) : updater;
+          setFilteredPosts(newPosts);
+          return newPosts;
+        });
+      };
+      
     const handleSearch = (searchQuery) => {
         setSearchQuery(searchQuery);
         if (!criteria) {
@@ -123,20 +122,20 @@ const Posts = () => {
             </button>
             {isAdding ? (
                 <div className={styles.addPostContainer}>
-                      <div className={styles.inputs}>
-                    <input
-                        className={styles.addPostInput}
-                        type="text"
-                        value={newPostTitle}
-                        onChange={(e) => setNewPostTitle(e.target.value)}
-                        placeholder="Enter post title"
-                    />
-                    <textarea
-                        className={styles.addPostTextarea}
-                        value={newPostBody}
-                        onChange={(e) => setNewPostBody(e.target.value)}
-                        placeholder="Enter post content"
-                    ></textarea>
+                    <div className={styles.inputs}>
+                        <input
+                            className={styles.addPostInput}
+                            type="text"
+                            value={newPostTitle}
+                            onChange={(e) => setNewPostTitle(e.target.value)}
+                            placeholder="Enter post title"
+                        />
+                        <textarea
+                            className={styles.addPostTextarea}
+                            value={newPostBody}
+                            onChange={(e) => setNewPostBody(e.target.value)}
+                            placeholder="Enter post content"
+                        ></textarea>
                     </div>
                     <div className={styles.buttons}>
                         <button className={styles.addButton} onClick={handleAddPost}>
@@ -160,15 +159,19 @@ const Posts = () => {
             )}
 
             <div className={styles.postsList}>
-                {filteredPosts.map((post, index) => (
-                    <Post
-                        key={post.id}
-                        index={index}
-                        post={post}
-                        setError={setError}
-                        updatePosts={updatePosts}
-                    />
-                ))}
+                {filteredPosts ? (
+                    filteredPosts.map((post, index) => (
+                        <Post
+                            key={post.id}
+                            index={index}
+                            post={post}
+                            setError={setError}
+                            updatePosts={updatePosts}
+                        />
+                    ))
+                ) : (
+                    <div>No Posts Found!</div>
+                )}
             </div>
         </div>
     );

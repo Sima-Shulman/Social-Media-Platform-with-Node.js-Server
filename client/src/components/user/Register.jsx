@@ -7,8 +7,6 @@ import styles from "./Login.module.css"; // שימוש באותו CSS מודול
 const Register = () => {
   const [password, setPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [step, setStep] = useState(1);
   const [error, setError] = useState("");
@@ -24,21 +22,21 @@ const Register = () => {
     }
     console.log(currentUser.username)
 
+
     try {
-      const users = await ApiService.request({
+      const user = await ApiService.request({
         url: `http://localhost:3000/users?username=${currentUser.username}`,
       });
-      console.log(users);
-
-      const existingUser = users;
-        
-      if (existingUser) {
+      if (user) {
         setError("Username already exists");
         return;
       }
-      console.log("User does not exist, proceeding to next step");
-      setError("");
-      setStep(2);
+      else {
+        console.log("User does not exist, proceeding to next step");
+        setError("");
+        setStep(2);
+      }
+
     } catch (error) {
       console.error("Error during registration:", error);
       setError("Error connecting to the server");
@@ -50,11 +48,9 @@ const Register = () => {
 
     try {
       const newUser = {
-        name: name,
         username: currentUser.username,
-        phone: phone,
         email: email,
-        website: password,
+        password: password,
       };
 
       const savedUser = await ApiService.request({
@@ -155,30 +151,6 @@ const Register = () => {
               <div className={styles.group_unique}>
                 <input
                   className={styles.inputField_unique}
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-                <span className={styles.highlight_unique}></span>
-                <span className={styles.bar_unique}></span>
-                <label className={styles.labelField_unique}>Name</label>
-              </div>
-              <div className={styles.group_unique}>
-                <input
-                  className={styles.inputField_unique}
-                  type="text"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  required
-                />
-                <span className={styles.highlight_unique}></span>
-                <span className={styles.bar_unique}></span>
-                <label className={styles.labelField_unique}>Phone</label>
-              </div>
-              <div className={styles.group_unique}>
-                <input
-                  className={styles.inputField_unique}
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -196,7 +168,7 @@ const Register = () => {
           </>
         )}
       </div>
-    </div>
+    </div >
   );
 };
 

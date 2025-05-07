@@ -34,7 +34,7 @@ const Home = () => {
                 <button onClick={() => navigate(`/users/${currentUser?.id}/home/info`)}>🛈 Info </button>
                 <button onClick={() => navigate(`/users/${currentUser?.id}/home/todos`)}>✅ Todos</button>
                 <button onClick={() => navigate(`/users/${currentUser?.id}/home/posts`)}> 📰 Posts</button>
-                <button onClick={() => navigate(`/users/${currentUser?.id}/home/albums`)}> 📸 Albums</button>
+                {/* <button onClick={() => navigate(`/users/${currentUser?.id}/home/albums`)}> 📸 Albums</button> */}
                 <button onClick={handleLogout}>🔒 Logout</button>
             </nav>
 

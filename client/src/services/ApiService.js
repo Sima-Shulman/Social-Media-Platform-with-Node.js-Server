@@ -23,8 +23,7 @@ class ApiService {
 
       return await response.json();
     } catch (error) {
-      console.error("API Request Failed:", error);
-      throw error;
+      return;
     }
   }
 }

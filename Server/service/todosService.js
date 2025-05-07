@@ -8,6 +8,14 @@ exports.queryAllTodos = async () => {
     throw new Error('Error fetching todos: ' + err.message);
   }
 };
+exports.queryTodoByUserId = async (userId) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM todos WHERE userId = ?', [userId]);
+    return rows;
+  } catch (err) {
+    throw new Error('Error fetching todos for user with ID: ' + userId + err.message);
+  }
+}
 exports.queryTodoById = async (id) => {
   try {
     const [rows] = await db.query('SELECT * FROM todos WHERE id = ?', [id]);

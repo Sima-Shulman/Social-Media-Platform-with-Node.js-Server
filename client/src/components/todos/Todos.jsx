@@ -24,7 +24,7 @@ const Todos = () => {
       }
       try {
         const data = await ApiService.request({
-          url: `http://localhost:3000/todos/?userId=${currentUser.id}`,
+          url: `http://localhost:3000/todos?userId=${currentUser.id}`,
         });
         updateTodos(data);
       } catch (err) {
@@ -35,19 +35,17 @@ const Todos = () => {
     fetchTodos();
   }, [currentUser?.id]);
 
-  const updateTodos = (updatedTodos) => {
-    let resolvedTodos = updatedTodos;
-
-    if (typeof updatedTodos === "function") {
-      resolvedTodos = updatedTodos(todos);
-    }
-
+  const updateTodos = (updater) => {
     setSearchQuery("");
     setCriteria("");
-
-    setTodos(resolvedTodos);
-    setFilteredTodos(resolvedTodos);
+  
+    setTodos((prevTodos) => {
+      const newTodos = typeof updater === "function" ? updater(prevTodos) : updater;
+      setFilteredTodos(newTodos);
+      return newTodos;
+    });
   };
+  
 
   const handleAddTodo = async () => {
     try {
@@ -89,6 +87,7 @@ const Todos = () => {
   };
 
   const handleSearch = (searchQuery) => {
+    setError("");
     setSearchQuery(searchQuery);
     if (!criteria) {
       setError("Please select a search criteria before searching");
@@ -187,15 +186,19 @@ const Todos = () => {
         </button>
       )}
       <div className={styles.todosList}>
-        {filteredTodos.map((todo, index) => (
-          <Todo
-            key={todo.id}
-            todo={todo}
-            index={index}
-            updateTodos={updateTodos}
-            setError={setError}
-          />
-        ))}
+        {filteredTodos ? (
+          filteredTodos.map((todo, index) => (
+            <Todo
+              key={todo.id}
+              todo={todo}
+              index={index}
+              updateTodos={updateTodos}
+              setError={setError}
+            />
+          ))
+        ) : (
+          <div>No Todos Found!</div>
+        )}
       </div>
     </div>
   );

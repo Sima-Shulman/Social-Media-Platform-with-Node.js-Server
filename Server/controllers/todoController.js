@@ -1,7 +1,15 @@
-const { queryAllTodos, queryTodoById, postTodo ,putTodo, deleteTodo } = require('../service/todosService.js');
+const { queryAllTodos, queryTodoByUserId, queryTodoById, postTodo ,putTodo, deleteTodo } = require('../service/todosService.js');
 
-exports.getAllTodos = async (req, res) => { 
+exports.getAllTodos = async ( req, res)=>{
     try {
+        const { userId } = req.query;
+        if (userId) {
+            const todos = await queryTodoByUserId(userId);
+            if (!todos || todos.length === 0) {
+                return res.status(404).json({ error: 'No todos found for user with id:' + userId });
+            }
+            return res.status(200).json(todos);
+        }
         const todos = await queryAllTodos();
         if (!todos || todos.length === 0) {
             return res.status(404).json({ error: 'No todos found' });
@@ -11,6 +19,7 @@ exports.getAllTodos = async (req, res) => {
         res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }
+
 exports.getTodoById = async (req, res) => { 
     try {
         const id = req.params.id
