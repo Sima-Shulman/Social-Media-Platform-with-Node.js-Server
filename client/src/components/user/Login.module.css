@@ -1,0 +1,167 @@
+/* Login.module.css */
+
+.loginContainer_unique {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+}
+
+.loginCard_unique {
+  width: 380px;
+  padding: 3em 2em 2em;
+  background: #fafafa;
+  border: 1px solid #ebebeb;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 1px 0px,
+    rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+  border-radius: 8px;
+}
+
+.loginHeader_unique {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #4a89dc;
+  margin-bottom: 1.5rem;
+}
+
+.group_unique {
+  position: relative;
+  margin-bottom: 45px;
+}
+
+.inputField_unique {
+  font-size: 16px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  background: #fafafa;
+  color: #636363;
+  border: none;
+  border-bottom: 1px solid #757575;
+}
+
+.errorMessage_unique{
+  color: red;
+  margin-left: 20%;
+}
+.inputField_unique:focus {
+  outline: none;
+}
+
+/* Label */
+.labelField_unique {
+  color: #999;
+  font-size: 20px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: all 0.2s ease;
+}
+
+.inputField_unique:focus ~ .labelField_unique,
+.inputField_unique:not(:placeholder-shown) ~ .labelField_unique {
+  top: -20px;
+  transform: scale(0.75);
+  left: -2px;
+  color: #4a89dc;
+}
+
+/* Underline */
+.bar_unique {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.bar_unique:before,
+.bar_unique:after {
+  content: "";
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #4a89dc;
+  transition: all 0.2s ease;
+}
+
+.bar_unique:before {
+  left: 50%;
+}
+
+.bar_unique:after {
+  right: 50%;
+}
+
+.inputField_unique:focus ~ .bar_unique:before,
+.inputField_unique:focus ~ .bar_unique:after {
+  width: 50%;
+}
+
+/* Highlight */
+.highlight_unique {
+  position: absolute;
+  height: 60%;
+  width: 100px;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.inputField_unique:focus ~ .highlight_unique {
+  animation: inputHighlighter_unique 0.3s ease;
+}
+
+@keyframes inputHighlighter_unique {
+  from {
+    background: #4a89dc;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+/* Button */
+.button_unique {
+  position: relative;
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 0.3em 0 1em 0;
+  width: 100%;
+  vertical-align: middle;
+  color: #fff;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: 1px;
+  background: #4a89dc;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button_unique:hover {
+  background: #357bd8;
+}
+
+.secondaryButton_unique {
+  background: transparent;
+  color: #4a89dc;
+  border: 2px solid #4a89dc;
+  margin-top: 1rem;
+  padding: 10px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.secondaryButton_unique:hover {
+  background: #eaf4fc;
+  color: #357bd8;
+}
