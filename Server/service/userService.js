@@ -1,22 +1,21 @@
 const db = require('../../database/createDB');
 
-// exports.queryAllUsers = async () => {
-//     try {
-//         const [rows] = await db.query('SELECT * FROM users');
-//         return rows;
-//     } catch (err) {
-//         throw new Error('Error fetching users: ' + err.message);
-//     }
-//     }
-
-// exports.queryUserUsername = async (username) => {
-//     try {
-//         const [rows] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
-//         return rows[0];
-//     } catch (err) {
-//         throw new Error('Error fetching user with ID: ' + id + ' ' + err.message);
-//     }
-// }
+exports.queryAllUsers = async () => {
+    try {
+        const [rows] = await db.query('SELECT * FROM users');
+        return rows;
+    } catch (err) {
+        throw new Error('Error fetching users: ' + err.message);
+    }
+}
+exports.queryUserByUsername = async (username) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
+        return rows.length > 0 ? rows[0] : null;
+    } catch (err) {
+        throw new Error('Error fetching user by username: ' + err.message);
+    }
+};
 
 exports.queryUserById = async (id) => {
     try {
@@ -40,6 +39,14 @@ exports.postUser = async ({ username, email, password }) => {
         return { id: result.insertId, username, email };
     } catch (err) {
         throw new Error('Error posting user: ' + err.message);
+    }
+}
+exports.queryUserPassword = async (userId) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM passwords WHERE userId = ?', [userId]);
+        return rows.length > 0 ? rows[0] : null;
+    } catch (err) {
+        throw new Error('Error fetching user password: ' + err.message);
     }
 }
 // exports.putUser = async (id, { username, email }) => {

@@ -16,7 +16,7 @@ exports.getCommentById = async (req, res) => {
         const id = req.params.id
         const comment = await queryCommentById(id);
         if (!comment || comment.length === 0) {
-            return res.status(404).json({ error: 'Comment with id:' + comment.id + ' not found' });
+            return res.status(404).json({ error: 'Comment with id:' + id + ' not found' });
         }
         res.status(200).json(comment);
     } catch (error) {
@@ -39,7 +39,7 @@ exports.updateComment = async (req, res) => {
         const id = req.params.id
         const isUpdate = await putComment(id, req.body);
         if (!isUpdate) {
-            return res.status(404).json({ error: 'Comment with id:' + comment.id + ' not found' });
+            return res.status(404).json({ error: 'Comment with id:' + id + ' not found' });
         }
         res.status(200).json('comment' + id + ' updated');
     } catch (error) {
@@ -51,7 +51,7 @@ exports.removeComment = async (req, res) => {
         const id = req.params.id
         const isDelete = await deleteComment(id);
         if (!isDelete) {
-            return res.status(404).json({ error: 'Comment with id:' + comment.id + ' not found' });
+            return res.status(404).json({ error: 'Comment with id:' + id + ' not found' });
         }
         res.status(200).json('comment' + id + ' deleted');
     } catch (error) {

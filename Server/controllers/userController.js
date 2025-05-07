@@ -1,21 +1,38 @@
-const {/*queryAllUsers,*/ queryUserById, postUser, /*putUser, deleteUser*/} = require('../service/userService');
-// exports.getAllUsers = async (req, res) => {
-//     try {
-//         const users = await queryAllUsers();
-//         if (!users || users.length === 0) {
-//             return res.status(404).json({ error: 'No users found' });
-//         }
-//         res.status(200).json(users);
-//     } catch (error) {
-//         res.status(500).json({ error: 'Internal server error.'+error.message });
-//     }
-// }
+const {queryAllUsers, queryUserByUsername, queryUserById, postUser,queryUserPassword /*putUser, deleteUser*/} = require('../service/userService');
+exports.getAllUsers = async (req, res) => {
+    try {
+        const { username ,password} = req.query;
+
+        if (username) {
+            const user = await queryUserByUsername(username);
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+            if(password){
+                let jsonPassword = await queryUserPassword(user.id);
+                if (!jsonPassword||password!=jsonPassword.password) {
+                    return res.status(404).json({ error: 'wrong details ' });                }
+                return res.status(200).json({user});
+            }
+            return res.status(200).json(user);
+        }
+
+        const users = await queryAllUsers();
+        if (!users || users.length === 0) {
+            return res.status(404).json({ error: 'No users found' });
+        }
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error. ' + error.message });
+    }
+};
+
 exports.getUserById = async (req, res) => {
     try {
         const id = req.params.id;
         const user = await queryUserById(id);
         if (!user || user.length === 0) {
-            return res.status(404).json({ error: 'User with id:' + user.id + ' not found' });
+            return res.status(404).json({ error: 'User with id:' + id + ' not found' });
         }
         res.status(200).json(user);
     } catch (error) {

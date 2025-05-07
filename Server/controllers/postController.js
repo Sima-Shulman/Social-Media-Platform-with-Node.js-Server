@@ -16,7 +16,7 @@ exports.getPostById = async (req, res) => {
         const id = req.params.id
         const post = await queryPostById(id);
         if (!post || post.length === 0) {
-            return res.status(404).json({ error: 'Post with id:' + post.id + ' not found' });
+            return res.status(404).json({ error: 'Post with id:' + id + ' not found' });
         }
         res.status(200).json(post);
     } catch (error) {
@@ -39,7 +39,7 @@ exports.updatePost = async (req, res) => {
         const id = req.params.id
         const isUpdate = await putPost(id, req.body);
         if (!isUpdate) {
-            return res.status(404).json({ error: 'Post with id:' + post.id + ' not found' });
+            return res.status(404).json({ error: 'Post with id:' + id + ' not found' });
         }
         res.status(200).json('post' + id + ' updated');
     } catch (error) {
@@ -51,9 +51,9 @@ exports.removePost = async (req, res) => {
         const id = req.params.id
         const isDeleted = await deletePost(id);
         if (!isDeleted) {
-            return res.status(404).json({ error: 'Post with id:' + post.id + ' not found' });
+            return res.status(404).json({ error: 'Post with id:' + id + ' not found' });
         }
-        res.status(200).json(post);
+        res.status(200).json('post' + id + ' deleted');
     } catch (error) {
         res.status(500).json({ error: 'Internal server error.'+error.message });
     }
