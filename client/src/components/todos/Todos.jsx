@@ -39,7 +39,7 @@ const Todos = () => {
     setSearchQuery("");
     setCriteria("");
   
-    setTodos((prevTodos) => {
+    setTodos((prevTodos=[]) => {
       const newTodos = typeof updater === "function" ? updater(prevTodos) : updater;
       setFilteredTodos(newTodos);
       return newTodos;

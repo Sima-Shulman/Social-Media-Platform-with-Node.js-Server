@@ -48,14 +48,14 @@ const Posts = () => {
     const updatePosts = (updater) => {
         setSearchQuery("");
         setCriteria("");
-      
-        setPosts((prevPosts) => {
-          const newPosts = typeof updater === "function" ? updater(prevPosts) : updater;
-          setFilteredPosts(newPosts);
-          return newPosts;
+
+        setPosts((prevPosts = []) => {
+            const resolvedPosts = typeof updater === "function" ? updater(prevPosts) : updater;
+            setFilteredPosts(resolvedPosts);
+            return resolvedPosts;
         });
-      };
-      
+    };
+
     const handleSearch = (searchQuery) => {
         setSearchQuery(searchQuery);
         if (!criteria) {

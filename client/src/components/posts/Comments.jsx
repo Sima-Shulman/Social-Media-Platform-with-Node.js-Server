@@ -15,7 +15,7 @@ const Comments = ({ post, setError }) => {
     const fetchComments = async () => {
       try {
         const data = await ApiService.request({
-          url: `http://localhost:3000/comments/?postId=${post.id}`,
+          url: `http://localhost:3000/posts/${post.id}/comments`,
         });
         setComments(data);
       } catch (err) {
@@ -29,15 +29,15 @@ const Comments = ({ post, setError }) => {
     try {
       const newCommentData = {
         postId: post.id,
-        userId: currentUser.id,
         body: newComment,
+        email: currentUser.email,
       };
       const savedComment = await ApiService.request({
-        url: "http://localhost:3000/comments",
+        url: `http://localhost:3000/posts/${post.id}/comments`,
         method: "POST",
         body: newCommentData,
       });
-      setComments((prev) => [...prev, savedComment]);
+      setComments((prev = []) => [...prev, savedComment]);
       setNewComment("");
     } catch (err) {
       setError(err.message);
@@ -47,7 +47,7 @@ const Comments = ({ post, setError }) => {
   const handleEditComment = async (commentId, index) => {
     try {
       await ApiService.request({
-        url: `http://localhost:3000/comments/${commentId}`,
+        url: `http://localhost:3000/posts/${post.id}/comments/${commentId}`,
         method: "PATCH",
         body: { body: editedComment },
       });
@@ -66,7 +66,7 @@ const Comments = ({ post, setError }) => {
   const handleDeleteComment = async (commentId) => {
     try {
       await ApiService.request({
-        url: `http://localhost:3000/comments/${commentId}`,
+        url: `http://localhost:3000/posts/${post.id}/comments/${commentId}`,
         method: "DELETE",
       });
       setComments((prev) => prev.filter((comment) => comment.id !== commentId));
@@ -78,57 +78,61 @@ const Comments = ({ post, setError }) => {
   return (
     <div className={styles.commentsContainer}>
       <h4 className={styles.commentsHeader}>Comments</h4>
-      {comments.map((comment, index) => (
-        <div key={comment.id} className={styles.commentCard}>
-          <p>{comment.body}</p>
-          <small>
-            By: {comment.userId === currentUser.id ? "You" : comment.email || "Unknown User"}
-          </small>
-          {comment.userId === currentUser.id && (
-            <div className={styles.commentActions}>
-              {editingComment === comment.id ? (
-                <>
-                  <textarea
-                    className={styles.addPostTextarea}
-                    value={editedComment}
-                    onChange={(e) => setEditedComment(e.target.value)}
-                  ></textarea>
-                  <button
-                    className={styles.addButton}
-                    onClick={() => handleEditComment(comment.id, index)}
-                  >
-                    Save
-                  </button>
-                  <button
-                    className={styles.cancelButton}
-                    onClick={() => setEditingComment(null)}
-                  >
-                    Cancel
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button
-                    className={styles.editButton}
-                    onClick={() => {
-                      setEditingComment(comment.id);
-                      setEditedComment(comment.body);
-                    }}
-                  >
-                    ✏️
-                  </button>
-                  <button
-                    className={styles.deleteButton}
-                    onClick={() => handleDeleteComment(comment.id)}
-                  >
-                    🗑️
-                  </button>
-                </>
-              )}
-            </div>
-          )}
-        </div>
-      ))}
+      {comments ? (
+        comments.map((comment, index) => (
+          <div key={comment.id} className={styles.commentCard}>
+            <p>{comment.body}</p>
+            <small>
+              By: {comment.email === currentUser.email ? "You" : comment.email || "Unknown User"}
+            </small>
+            {comment.userId === currentUser.id && (
+              <div className={styles.commentActions}>
+                {editingComment === comment.id ? (
+                  <>
+                    <textarea
+                      className={styles.addPostTextarea}
+                      value={editedComment}
+                      onChange={(e) => setEditedComment(e.target.value)}
+                    ></textarea>
+                    <button
+                      className={styles.addButton}
+                      onClick={() => handleEditComment(comment.id, index)}
+                    >
+                      Save
+                    </button>
+                    <button
+                      className={styles.cancelButton}
+                      onClick={() => setEditingComment(null)}
+                    >
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className={styles.editButton}
+                      onClick={() => {
+                        setEditingComment(comment.id);
+                        setEditedComment(comment.body);
+                      }}
+                    >
+                      ✏️
+                    </button>
+                    <button
+                      className={styles.deleteButton}
+                      onClick={() => handleDeleteComment(comment.id)}
+                    >
+                      🗑️
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+        ))
+      ) : (
+        <p>No comments yet. Be the first to comment!</p>
+      )}
       <textarea
         className={styles.addPostTextarea}
         value={newComment}
