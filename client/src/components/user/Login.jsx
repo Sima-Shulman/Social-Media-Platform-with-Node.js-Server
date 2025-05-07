@@ -17,7 +17,8 @@ const Login = () => {
       const response = await ApiService.request({
         url: `http://localhost:3000/users?username=${currentUser.username}&&password=${password}`,
       });
-      const [existingUser] = response;
+      
+      const existingUser = response.user;
 
       if (existingUser) {
         setCurrentUser({

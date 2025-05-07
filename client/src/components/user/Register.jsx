@@ -22,6 +22,7 @@ const Register = () => {
       setError("Passwords do not match");
       return;
     }
+    console.log(currentUser.username)
 
     try {
       const users = await ApiService.request({
@@ -29,9 +30,9 @@ const Register = () => {
       });
       console.log(users);
 
-      // const [existingUser] = users;
-      // console.log(existingUser);
-      if (users) {
+      const existingUser = users;
+        
+      if (existingUser) {
         setError("Username already exists");
         return;
       }
