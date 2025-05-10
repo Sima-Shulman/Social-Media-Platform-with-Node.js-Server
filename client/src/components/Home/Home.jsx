@@ -7,6 +7,7 @@ import Posts from "../posts/Posts";
 import Albums from "../albums/Albums";
 import NotFound from "../NotFound";
 import styles from "./Home.module.css";
+import e from "cors";
 
 const Home = () => {
     const knownRoutes = ["/info", "/todos", "/posts", "/albums", "/home", "/login"];
@@ -24,7 +25,7 @@ const Home = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("currentUser");
-        setCurrentUser({ username: "", id: "" });
+        setCurrentUser({ username: "", id: "" , e});
         navigate("/login");
     };
 

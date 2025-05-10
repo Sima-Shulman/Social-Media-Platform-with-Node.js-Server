@@ -24,10 +24,11 @@ const Login = () => {
         setCurrentUser({
           username: existingUser.username,
           id: existingUser.id,
+          email: existingUser.email,
         });
         localStorage.setItem(
           "currentUser",
-          JSON.stringify({ username: existingUser.username, id: existingUser.id })
+          JSON.stringify({ username: existingUser.username, id: existingUser.id , email: existingUser.email })
         );
         navigate(`/users/${existingUser.id}/home`);
       } else {

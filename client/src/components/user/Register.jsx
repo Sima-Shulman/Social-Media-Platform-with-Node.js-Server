@@ -59,10 +59,10 @@ const Register = () => {
         body: newUser,
       });
 
-      setCurrentUser({ username: savedUser.username, id: savedUser.id });
+      setCurrentUser({ username: savedUser.username, id: savedUser.id, email: savedUser.email });
       localStorage.setItem(
         "currentUser",
-        JSON.stringify({ username: savedUser.username, id: savedUser.id })
+        JSON.stringify({ username: savedUser.username, id: savedUser.id, email: savedUser.email })
       );
       setError("");
       navigate(`/users/${savedUser.id}/home`);

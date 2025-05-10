@@ -85,7 +85,7 @@ const Comments = ({ post, setError }) => {
             <small>
               By: {comment.email === currentUser.email ? "You" : comment.email || "Unknown User"}
             </small>
-            {comment.userId === currentUser.id && (
+            {comment.email === currentUser.email && (
               <div className={styles.commentActions}>
                 {editingComment === comment.id ? (
                   <>
