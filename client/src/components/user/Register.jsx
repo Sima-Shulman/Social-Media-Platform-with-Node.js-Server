@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../services/UserContext";
 import ApiService from "../../services/ApiService";
+import { hashPassword } from "../../services/encryptService";
+
 import styles from "./Login.module.css"; // שימוש באותו CSS מודול
 
 const Register = () => {
@@ -45,12 +47,13 @@ const Register = () => {
 
   const handleCompleteRegister = async (e) => {
     e.preventDefault();
+    const hashedPassword = await hashPassword(password);
 
     try {
       const newUser = {
         username: currentUser.username,
         email: email,
-        password: password,
+        password: hashedPassword,
       };
 
       const savedUser = await ApiService.request({

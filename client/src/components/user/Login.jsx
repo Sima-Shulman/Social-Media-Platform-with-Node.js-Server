@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../services/UserContext";
 import ApiService from "../../services/ApiService";
 import styles from "./Login.module.css";
+import { hashPassword } from "../../services/encryptService";
 
 const Login = () => {
   const [password, setPassword] = useState("");
@@ -14,8 +15,9 @@ const Login = () => {
     e.preventDefault();
 
     try {
+      const hashedPassword = await hashPassword(password);
       const response = await ApiService.request({
-        url: `http://localhost:3000/users?username=${currentUser.username}&&password=${password}`,
+        url: `http://localhost:3000/users?username=${currentUser.username}&&password=${hashedPassword}`,
       });
       
       const existingUser = response.user;
