@@ -73,7 +73,7 @@ const Albums = () => {
         }
         setError("");
         setFilteredAlbums(SearchService.filterItems(searchQuery, albums, criteria));
-    };   
+    };
 
     return (
         <>
@@ -120,23 +120,27 @@ const Albums = () => {
                     </div>
                     {error && <p className={styles.errorMessage}>{error}</p>}
                     <div className={styles.albumsGrid}>
-                        {filteredAlbums.map((album) => (
-                            <div
-                                key={album.id}
-                                className={styles.albumCard}
-                                onClick={() => {
-                                    setShowAlbums(false);
-                                    navigate(`${album.id}/photos`);
-                                }}
-                            >
-                                <p>
-                                    <strong>ID:</strong> {album.id}
-                                </p>
-                                <p>
-                                    <strong>Title:</strong> {album.title}
-                                </p>
-                            </div>
-                        ))}
+                        {filteredAlbums ?
+                            (filteredAlbums.map((album) => (
+                                <div
+                                    key={album.id}
+                                    className={styles.albumCard}
+                                    onClick={() => {
+                                        setShowAlbums(false);
+                                        navigate(`${album.id}/photos`);
+                                    }}
+                                >
+                                    <p>
+                                        <strong>ID:</strong> {album.id}
+                                    </p>
+                                    <p>
+                                        <strong>Title:</strong> {album.title}
+                                    </p>
+                                </div>
+                            )))
+                            : (
+                                <p className={styles.noAlbumsMessage}>No albums found.</p>
+                            )}
                     </div>
                 </div>
             ) : (

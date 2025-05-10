@@ -160,30 +160,34 @@ const Photos = ({ setShowAlbums }) => {
             {error && <p className={styles.errorMessage}>{error}</p>}
 
             <div className={styles.photosGrid}>
-                {photos.map((photo) => (
-                    <div key={photo.id} className={styles.photoCard}>
-                        <img src={photo.thumbnailUrl} alt={photo.title} />
-                        <div className={styles.photoOverlay}>
-                            <p>{photo.title}</p>
-                            <button
-                                className={styles.editButton}
-                                onClick={() => {
-                                    setEditedPhoto(photo);
-                                    setEditedTitle(photo.title);
-                                    setIsEditing(true);
-                                }}
-                            >
-                                ✏️
-                            </button>
-                            <button
-                                className={styles.deleteButton}
-                                onClick={() => handleDeletePhoto(photo.id)}
-                            >
-                                🗑️
-                            </button>
+                {photos.length !=0 ?
+                    (photos.map((photo) => (
+                        <div key={photo.id} className={styles.photoCard}>
+                            <img src={photo.thumbnailUrl} alt={photo.title} />
+                            <div className={styles.photoOverlay}>
+                                <p>{photo.title}</p>
+                                <button
+                                    className={styles.editButton}
+                                    onClick={() => {
+                                        setEditedPhoto(photo);
+                                        setEditedTitle(photo.title);
+                                        setIsEditing(true);
+                                    }}
+                                >
+                                    ✏️
+                                </button>
+                                <button
+                                    className={styles.deleteButton}
+                                    onClick={() => handleDeletePhoto(photo.id)}
+                                >
+                                    🗑️
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    )))
+                    : (
+                        <p className={styles.noMorePhotos}>No photos available.</p>
+                    )}
             </div>
 
             {hasMore && (
@@ -195,7 +199,7 @@ const Photos = ({ setShowAlbums }) => {
                     {loading ? "Loading..." : "Load More Photos"}
                 </button>
             )}
-            {!hasMore && <p className={styles.noMorePhotos}>No more photos available.</p>}
+            {(!hasMore && photos.length!=0) && <p className={styles.noMorePhotos}>No more photos available.</p>}
         </div>
     );
 };

@@ -76,7 +76,10 @@ con.connect(function (err) {
     //   completed BOOLEAN DEFAULT FALSE,
     //   FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE)`;
     // con.query(sql2, function (err, result) {
-    //     if (err) thro    // var sql6 = `
+    //     if (err) throw err;
+    //     console.log("todos table created");
+    // });
+    // var sql6 = `
     // CREATE TABLE albums (
     // id INT AUTO_INCREMENT PRIMARY KEY ,
     // userId INT NOT NULL,
