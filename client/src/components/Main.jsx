@@ -15,9 +15,9 @@ function Main() {
                         <Route path="/" element={<Navigate to="/login" />}></Route>
                         <Route path="/login" element={<Login />}></Route>
                         <Route path="/register" element={<Register />}></Route>
-                        <Route path="/users/:id/home/*" element={<Home />}></Route> 
+                        <Route path="/users/:id/home/*" element={<Home />}></Route>
                         <Route path="/NotFound" element={<NotFound />} />
-                        <Route path="*" element={<Navigate to="/NotFound" replace />} />                    
+                        <Route path="*" element={<Navigate to="/NotFound" replace />} />
                     </Routes >
                 </Router>
             </UserProvider>

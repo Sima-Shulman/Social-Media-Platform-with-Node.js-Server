@@ -3,6 +3,7 @@ const cors = require('cors');
 const todosRoutes = require('./routes/todosRoutes');
 const postsRoutes = require('./routes/postsRoutes');
 const userRoutes = require('./routes/usersRoutes');
+const albumRoutes = require('./routes/albumsRoutes');
 const app = express();
 app.use(express.json());
 app.use(cors()); // מאפשר גישה מכל דומיין
@@ -13,7 +14,7 @@ app.use(cors()); // מאפשר גישה מכל דומיין
 app.use('/todos',todosRoutes);
 app.use('/posts', postsRoutes);
 app.use('/users', userRoutes);
-
+app.use('/albums', albumRoutes);
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });

@@ -22,7 +22,7 @@ con.connect(function (err) {
     });
     //   con.query("DROP TABLE comments", function (err, result) {
     //     if (err) throw err;
-    //     console.log(" todos table deleted!");
+    //     console.log(" comments table deleted!");
     // })
     // con.query("DROP TABLE todos", function (err, result) {
     //     if (err) throw err;
@@ -30,16 +30,25 @@ con.connect(function (err) {
     // })
     // con.query("DROP TABLE posts", function (err, result) {
     //     if (err) throw err;
-    //     console.log(" users table deleted!");
+    //     console.log(" posts table deleted!");
+    // })
+    // con.query("DROP TABLE photos", function (err, result) {
+    //     if (err) throw err;
+    //     console.log(" photos table deleted!");
+    // })
+    // con.query("DROP TABLE albums", function (err, result) {
+    //     if (err) throw err;
+    //     console.log(" albums table deleted!");
     // })
     // con.query("DROP TABLE passwords", function (err, result) {
     //     if (err) throw err;
-    //     console.log(" users table deleted!");
+    //     console.log(" passwords table deleted!");
     // })
     // con.query("DROP TABLE users", function (err, result) {
     //     if (err) throw err;
     //     console.log(" users table deleted!");
     // })
+
     // var sql1 = `
     //   CREATE TABLE users (
     //     id INT AUTO_INCREMENT PRIMARY KEY ,
@@ -67,7 +76,28 @@ con.connect(function (err) {
     //   completed BOOLEAN DEFAULT FALSE,
     //   FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE)`;
     // con.query(sql2, function (err, result) {
+    //     if (err) thro    // var sql6 = `
+    // CREATE TABLE albums (
+    // id INT AUTO_INCREMENT PRIMARY KEY ,
+    // userId INT NOT NULL,
+    // title VARCHAR(255),
+    // FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE)`;
+    // con.query(sql6, function (err, result) {
     //     if (err) throw err;
+    //     console.log("albums table created");
+    // });
+    // var sql7 = `
+    // CREATE TABLE photos (
+    // id INT AUTO_INCREMENT PRIMARY KEY ,
+    // albumId INT NOT NULL,
+    // title VARCHAR(255),
+    // url VARCHAR(255),
+    // FOREIGN KEY (albumId) REFERENCES albums(id) ON DELETE CASCADE)`;
+    // con.query(sql7, function (err, result) {
+    //     if (err) throw err;
+    //     console.log("photos table created");
+    // }
+    // );w err;
     //     console.log("todos table created");
     // });
     //   var sql3 = `
@@ -94,6 +124,7 @@ con.connect(function (err) {
     //       if (err) throw err;
     //       console.log("comments table created");
     //   });
+
     // const insertUsersAndPasswords = () => {
     //     for (let i = 1; i <= 50; i++) {
     //         const username = `user${i}`;
@@ -156,7 +187,33 @@ con.connect(function (err) {
     //     }
     // };
     // insertComments();
+    // const insertAlbums = () => {
+    //     for (let i = 1; i <= 60; i++) {
+    //         const userId = Math.ceil(i / 10); // כל 10 אלבומים שייכים למשתמש אחר
+    //         const title = `Album ${i}`;
 
+    //         const sql = `INSERT INTO albums (userId, title) VALUES (?, ?)`;
+    //         con.query(sql, [userId, title], (err, result) => {
+    //             if (err) throw err;
+    //             console.log(`Album ${i} inserted`);
+    //         });
+    //     }
+    // }
+    // insertAlbums();
+    // const insertPhotos = () => {
+    //     for (let i = 1; i <= 600; i++) {
+    //         const albumId = Math.ceil(i / 10); // כל 10 תמונות שייכות לאלבום אחר
+    //         const title = `Photo ${i}`;
+    //         const url = `https://picsum.photos/seed/user${i}/400/300`;
+
+    //         const sql = `INSERT INTO photos (albumId, title, url) VALUES (?, ?, ?)`;
+    //         con.query(sql, [albumId, title, url], (err, result) => {
+    //             if (err) throw err;
+    //             console.log(`Photo ${i} inserted`);
+    //         });
+    //     }
+    // };
+    // insertPhotos();
 
 });
 module.exports = con.promise();

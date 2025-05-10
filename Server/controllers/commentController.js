@@ -25,7 +25,8 @@ exports.getCommentById = async (req, res) => {
 }
 exports.createComment = async (req, res) => {
     try {
-        const comment = await postComment(req.body);
+        const comment = await postComment(req.body, req.params.postId);
+
         if (!comment || comment.length === 0) {
             return res.status(404).json({ error: 'Comment with id:' + comment.id + ' cannot be created' });
         }
@@ -37,7 +38,7 @@ exports.createComment = async (req, res) => {
 exports.updateComment = async (req, res) => {
     try {
         const id = req.params.id
-        const isUpdate = await putComment(id, req.body);
+        const isUpdate = await putComment(id, req.body, req.params.postId);
         if (!isUpdate) {
             return res.status(404).json({ error: 'Comment with id:' + id + ' not found' });
         }

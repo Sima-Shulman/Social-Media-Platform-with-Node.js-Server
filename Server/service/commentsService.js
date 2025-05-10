@@ -17,7 +17,7 @@ exports.queryCommentById = async (id) => {
         throw new Error('Error fetching comment with ID: ' + id + err.message);
     }
 }
-exports.postComment = async ({ postId, email, title, body }) => {
+exports.postComment = async ({ email, title, body },postId) => {
     try {
         const [result] = await db.query(
             'INSERT INTO comments (postId, email, title, body) VALUES (?, ?, ?, ?)',
@@ -28,7 +28,7 @@ exports.postComment = async ({ postId, email, title, body }) => {
         throw new Error('Error posting Comment: ' + err.message);
     }
 }
-exports.putComment = async (id, { postId, email, title, body }) => {
+exports.putComment = async (id, {email, title, body },postId) => {
     try {
         const [result] = await db.query(
             'UPDATE comments SET postId = ?, email = ?, title = ? , body = ? WHERE id = ?',

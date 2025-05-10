@@ -26,10 +26,10 @@ const Photos = ({ setShowAlbums }) => {
         if (loading || !hasMore) return;
         setLoading(true);
         try {
-            const data = await ApiService.request({
-                url: `http://localhost:3000/photos/?albumId=${albumId}&_start=${offset}&_limit=${PHOTOS_PER_PAGE}`,
+            const response = await ApiService.request({
+                url: `http://localhost:3000/albums/${albumId}/photos?_start=${offset}&_limit=${PHOTOS_PER_PAGE}`,
             });
-
+            const data = response.photos || [];
             if (data.length === 0) {
                 setHasMore(false);
             } else {
@@ -57,7 +57,7 @@ const Photos = ({ setShowAlbums }) => {
 
     const handleAddPhoto = async () => {
         try {
-            const duplicate = photos.some((photo) => photo.thumbnailUrl === newPhoto.url);
+            const duplicate = photos.some((photo) => photo.url === newPhoto.url);
             if (duplicate) {
                 setError("Photo already exists.");
                 return;
@@ -65,10 +65,10 @@ const Photos = ({ setShowAlbums }) => {
             const photoToAdd = {
                 albumId: parseInt(albumId),
                 title: newPhoto.title,
-                thumbnailUrl: newPhoto.url,
+                url: newPhoto.url,
             };
             const savedPhoto = await ApiService.request({
-                url: "http://localhost:3000/photos",
+                url: `http://localhost:3000/albums/${albumId}/photos`,
                 method: "POST",
                 body: photoToAdd,
             });
@@ -83,7 +83,7 @@ const Photos = ({ setShowAlbums }) => {
     const handleDeletePhoto = async (id) => {
         try {
             await ApiService.request({
-                url: `http://localhost:3000/photos/${id}`,
+                url: `http://localhost:3000/albums/${albumId}/photos/${id}`,
                 method: "DELETE",
             });
 
@@ -96,8 +96,8 @@ const Photos = ({ setShowAlbums }) => {
     const handleEditPhoto = async () => {
         try {
             await ApiService.request({
-                url: `http://localhost:3000/photos/${editedPhoto.id}`,
-                method: "PATCH",
+                url: `http://localhost:3000/albums/${albumId}/photos/${editedPhoto.id}`,
+                method: "PUT",
                 body: { title: editedTitle },
             });
 
@@ -111,8 +111,8 @@ const Photos = ({ setShowAlbums }) => {
             setError("Failed to edit photo.");
         }
     };
-    
-    const backToAlbums=()=>{
+
+    const backToAlbums = () => {
         navigate(-1);
         setShowAlbums(true);
     }
