@@ -163,7 +163,7 @@ const Photos = ({ setShowAlbums }) => {
                 {photos.length !=0 ?
                     (photos.map((photo) => (
                         <div key={photo.id} className={styles.photoCard}>
-                            <img src={photo.thumbnailUrl} alt={photo.title} />
+                            <img src={photo.url} alt={photo.title} />
                             <div className={styles.photoOverlay}>
                                 <p>{photo.title}</p>
                                 <button
