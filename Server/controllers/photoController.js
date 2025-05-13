@@ -2,7 +2,7 @@ const {queryAllPhotos, queryPhotoById, postPhoto, putPhoto, deletePhoto} = requi
 exports.getAllPhotos = async (req, res) => {
     const albumId = req.params.albumId;
     const offset = parseInt(req.query._start) || 0;
-    const limit = parseInt(req.query._limit) || 5; // default limit
+    const limit = parseInt(req.query._limit) || 5;
 
     try {
         const photos = await queryAllPhotos(albumId, offset, limit);

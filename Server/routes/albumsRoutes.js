@@ -8,7 +8,6 @@ router.get('/:id', getAlbumById);
 router.post('/', createAlbum);
 router.put('/:id', updateAlbum);
 router.delete('/:id', removeAlbum);
-// Nested route for photos
 router.use('/:albumId/photos', photosRouter);
 
 module.exports = router;

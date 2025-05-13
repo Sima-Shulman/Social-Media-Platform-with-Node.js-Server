@@ -8,6 +8,5 @@ router.get('/:id', getPostById);
 router.post('/',createPost)
 router.put('/:id',updatePost)
 router.delete('/:id', removePost);
-// Nested route for comments
 router.use('/:postId/comments', commentsRouter);
 module.exports = router;

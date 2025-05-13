@@ -20,34 +20,34 @@ con.connect(function (err) {
         if (err) throw err;
         console.log("Using MyDB database");
     });
-    //   con.query("DROP TABLE comments", function (err, result) {
+    // con.query("DROP TABLE comments", function (err, result) {
     //     if (err) throw err;
     //     console.log(" comments table deleted!");
-    // })
+    // });
     // con.query("DROP TABLE todos", function (err, result) {
     //     if (err) throw err;
     //     console.log(" todos table deleted!");
-    // })
+    // });
     // con.query("DROP TABLE posts", function (err, result) {
     //     if (err) throw err;
     //     console.log(" posts table deleted!");
-    // })
+    // });
     // con.query("DROP TABLE photos", function (err, result) {
     //     if (err) throw err;
     //     console.log(" photos table deleted!");
-    // })
+    // });
     // con.query("DROP TABLE albums", function (err, result) {
     //     if (err) throw err;
     //     console.log(" albums table deleted!");
-    // })
+    // });
     // con.query("DROP TABLE passwords", function (err, result) {
     //     if (err) throw err;
     //     console.log(" passwords table deleted!");
-    // })
+    // });
     // con.query("DROP TABLE users", function (err, result) {
     //     if (err) throw err;
     //     console.log(" users table deleted!");
-    // })
+    // });
 
     // var sql1 = `
     //   CREATE TABLE users (
@@ -99,22 +99,20 @@ con.connect(function (err) {
     // con.query(sql7, function (err, result) {
     //     if (err) throw err;
     //     console.log("photos table created");
-    // }
-    // );w err;
-    //     console.log("todos table created");
     // });
-    //   var sql3 = `
+
+    // var sql3 = `
     //     CREATE TABLE posts (
     //     id INT AUTO_INCREMENT  PRIMARY KEY,
     //     userId INT NOT NULL,
     //     title VARCHAR(255),
     //     body TEXT,
     //     FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE)`;
-    //   con.query(sql3, function (err, result) {
-    //       if (err) throw err;
-    //       console.log("posts table created");
-    //   });
-    //   var sql4 = `
+    // con.query(sql3, function (err, result) {
+    //     if (err) throw err;
+    //     console.log("posts table created");
+    // });
+    // var sql4 = `
     //   CREATE TABLE comments (
     //   id INT AUTO_INCREMENT PRIMARY KEY ,
     //   postId INT NOT NULL,
@@ -123,10 +121,10 @@ con.connect(function (err) {
     //   body TEXT,
     //   FOREIGN KEY (postId) REFERENCES posts(id) ON DELETE CASCADE,
     //   FOREIGN KEY (email) REFERENCES users(email)  )`;
-    //   con.query(sql4, function (err, result) {
-    //       if (err) throw err;
-    //       console.log("comments table created");
-    //   });
+    // con.query(sql4, function (err, result) {
+    //     if (err) throw err;
+    //     console.log("comments table created");
+    // });
 
     // const insertUsersAndPasswords = () => {
     //     for (let i = 1; i <= 50; i++) {
@@ -149,9 +147,9 @@ con.connect(function (err) {
     // insertUsersAndPasswords();
     // const insertTodos = () => {
     //     for (let i = 1; i <= 50; i++) {
-    //         const userId = Math.ceil(i / 10); // כל 10 משימות שייכות למשתמש אחר
+    //         const userId = Math.ceil(i / 10);
     //         const title = `Todo ${i}`;
-    //         const completed = i % 2 === 0; // משימות זוגיות מסומנות כבוצעו
+    //         const completed = i % 2 === 0;
 
     //         const sql = `INSERT INTO todos (userId, title, completed) VALUES (?, ?, ?)`;
     //         con.query(sql, [userId, title, completed], (err, result) => {
@@ -162,7 +160,7 @@ con.connect(function (err) {
     // };
     // insertTodos();
     // const insertPosts = () => {
-    //     for (let i = 1; i <= 20; i++) {
+    //     for (let i = 1; i <= 60; i++) {
     //         const userId = Math.ceil(i / 5);
     //         const title = `Post ${i}`;
     //         const body = `This is the body of post ${i}`;
@@ -177,8 +175,8 @@ con.connect(function (err) {
     // insertPosts();
     // const insertComments = () => {
     //     for (let i = 1; i <= 100; i++) {
-    //         const postId = Math.ceil(i / 5); // כל 5 תגובות שייכות לפוסט אחר
-    //         const email = `user${Math.ceil(postId / 4)}@gmail.com`; // קשר בין תגובות למשתמשים
+    //         const postId = Math.ceil(i / 5);
+    //         const email = `user${Math.ceil(postId / 4)}@gmail.com`;
     //         const title = `Comment ${i}`;
     //         const body = `This is the body of comment ${i}`;
 
@@ -192,7 +190,7 @@ con.connect(function (err) {
     // insertComments();
     // const insertAlbums = () => {
     //     for (let i = 1; i <= 60; i++) {
-    //         const userId = Math.ceil(i / 10); // כל 10 אלבומים שייכים למשתמש אחר
+    //         const userId = Math.ceil(i / 10);
     //         const title = `Album ${i}`;
 
     //         const sql = `INSERT INTO albums (userId, title) VALUES (?, ?)`;
@@ -205,7 +203,7 @@ con.connect(function (err) {
     // insertAlbums();
     // const insertPhotos = () => {
     //     for (let i = 1; i <= 600; i++) {
-    //         const albumId = Math.ceil(i / 10); // כל 10 תמונות שייכות לאלבום אחר
+    //         const albumId = Math.ceil(i / 10);
     //         const title = `Photo ${i}`;
     //         const url = `https://picsum.photos/seed/user${i}/400/300`;
 
@@ -217,6 +215,5 @@ con.connect(function (err) {
     //     }
     // };
     // insertPhotos();
-
 });
 module.exports = con.promise();

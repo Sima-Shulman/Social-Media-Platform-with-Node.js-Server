@@ -50,27 +50,27 @@ exports.createUser = async (req, res) => {
         res.status(500).json({ error: 'Internal server error.'+error.message });
     }
 }
-// exports.updateUser = async (req, res) => {
-//     try {
-//         const id = req.params.id
-//         const isUpdate = await putUser(id, req.body);
-//         if (!isUpdate) {
-//             return res.status(404).json({ error: 'User with id:' + user.id + ' not found' });
-//         }
-//         res.status(200).json('user' + id + ' updated');
-//     } catch (error) {
-//         res.status(500).json({ error: 'Internal server error.'+error.message });
-//     }
-// }
-// exports.removeUser = async (req, res) => {
-//     try {
-//         const id = req.params.id
-//         const isDelete = await deleteUser(id);
-//         if (!isDelete) {
-//             return res.status(404).json({ error: 'User with id:' + user.id + ' not found' });
-//         }
-//         res.status(200).json('user' + id + ' deleted');
-//     } catch (error) {
-//         res.status(500).json({ error: 'Internal server error.'+error.message });
-//     }
-// }
+exports.updateUser = async (req, res) => {
+    try {
+        const id = req.params.id
+        const isUpdate = await putUser(id, req.body);
+        if (!isUpdate) {
+            return res.status(404).json({ error: 'User with id:' + user.id + ' not found' });
+        }
+        res.status(200).json('user' + id + ' updated');
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error.'+error.message });
+    }
+}
+exports.removeUser = async (req, res) => {
+    try {
+        const id = req.params.id
+        const isDelete = await deleteUser(id);
+        if (!isDelete) {
+            return res.status(404).json({ error: 'User with id:' + user.id + ' not found' });
+        }
+        res.status(200).json('user' + id + ' deleted');
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error.'+error.message });
+    }
+}

@@ -49,22 +49,22 @@ exports.queryUserPassword = async (userId) => {
         throw new Error('Error fetching user password: ' + err.message);
     }
 }
-// exports.putUser = async (id, { username, email }) => {
-//     try {
-//         const [result] = await db.query(
-//             'UPDATE users SET username = ?, email = ? WHERE id = ?',
-//             [username, email, id]
-//         );
-//         return result.affectedRows > 0;
-//     } catch (err) {
-//         throw new Error('Error updating user: ' + err.message);
-//     }
-// }
-// exports.deleteUser = async (id) => {
-//     try {
-//         const [result] = await db.query('DELETE FROM users WHERE id = ?', [id]);
-//         return result.affectedRows > 0;
-//     } catch (err) {
-//         throw new Error('Error deleting user: ' + err.message);
-//     }
-// }
+exports.putUser = async (id, { username, email }) => {
+    try {
+        const [result] = await db.query(
+            'UPDATE users SET username = ?, email = ? WHERE id = ?',
+            [username, email, id]
+        );
+        return result.affectedRows > 0;
+    } catch (err) {
+        throw new Error('Error updating user: ' + err.message);
+    }
+}
+exports.deleteUser = async (id) => {
+    try {
+        const [result] = await db.query('DELETE FROM users WHERE id = ?', [id]);
+        return result.affectedRows > 0;
+    } catch (err) {
+        throw new Error('Error deleting user: ' + err.message);
+    }
+}
