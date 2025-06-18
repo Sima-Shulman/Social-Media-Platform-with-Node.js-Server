@@ -1,147 +1,131 @@
-# 🌟 Social Media Platform Project 🚀
+# 📱 Social Media Platform Project
 
-Welcome to our **awesome** full-stack social media platform! Built with 💖 as part of the second-year curriculum at the **Lev Academic Center for Haredi Seminars** (5785/2024-2025), under the guidance of *Prof. Shlomo Kipnis*. This project is a vibrant, JSONPlaceholder-inspired app where users can manage todos, posts, and comments with a sleek React frontend, a robust Node.js/Express backend, and a MySQL database. Let’s dive into the fun! 🎉
+## Overview
 
-## 🎈 What’s This Project About?
+Welcome to our **Social Media Platform** project, built for the second-year curriculum at the **Lev Academic Center for Haredi Seminars** (5785/2024-2025) under *Prof. Shlomo Kipnis*. This full-stack app, inspired by JSONPlaceholder, lets users manage todos, posts, and comments using a **React** frontend, **Node.js/Express** backend, and **MySQL** database. It’s a practical showcase of RESTful APIs, user authentication, and data management. 🚀
 
-This is a **dynamic** web app that lets users:
+## Features
 
-- 📝 Create and manage their todos.
-- 📬 Share posts and comments with the community.
-- 🔐 Log in securely with username and password.
-- 🌐 Navigate a user-friendly dashboard with React Router.
+- **🔐 User Login**: Secure login with username/password stored in MySQL. Invalid attempts keep you on the login page.
+- **📊 Dashboard**: Navigate to *Info*, *Todos*, *Posts*, or *Logout* with a clean interface.
+- **✅ Todos**: View, add, update, or delete your todos, sorted by ID with completion checkboxes.
+- **📬 Posts & Comments**: Browse all posts, manage your own posts/comments, and view comments per post.
+- **🔍 Query Support**: Filter data with URL params like `?_limit` or `?sort`.
+- **🛡️ Secure Data**: Passwords stored in a separate MySQL table for extra security.
+- **📝 Server Logging**: Tracks actions like login attempts and data changes.
 
-Inspired by *jsonplaceholder.typicode.com*, it’s packed with **RESTful API** goodness (GET, POST, PUT, DELETE) and advanced features like query filtering and user authentication. Whether you’re a coder or a curious visitor, this project is a blast to explore! 😎
+## Tech Stack
 
-## ✨ Cool Features
+### Client
 
-- **🔑 Secure Login**: Log in with a username and password, stored safely in MySQL. Wrong credentials? You’ll get a friendly nudge to try again! 🚫
-- **📊 User Dashboard**: View your profile, todos, posts, or log out with a slick navigation bar.
-- **✅ Todos Galore**: Add, update, or delete todos with handy checkboxes to track progress.
-- **💬 Posts & Comments**: Share posts, comment on others, and manage your content (only yours, though! 😜).
-- **🔍 Smart Queries**: Filter and sort data with URL params like `?_limit`, `?_page`, or `?sort`. Super powerful!
-- **🛡️ Password Protection**: Passwords live in a separate, locked-down MySQL table.
-- **📋 Action Logging**: The server keeps tabs on key actions like login attempts and data changes.
+- **React** ⚛️: For a dynamic, component-based UI.
+- **React Router** 🛤️: Handles page navigation.
+- **React Hooks** 🪝: Manages state and effects.
+- **JS (Async/Await, Fetch)**: Powers API calls.
 
-## 🛠️ Tech Stack That Rocks!
+### Server
 
-### 🌐 Client-Side
+- **Node.js** 🟢: Runs the backend.
+- **Express.js** 📡: Builds the RESTful API.
+- **MySQL** 🗄️: Stores users, todos, posts, comments, and passwords.
 
-- **React** ⚛️: Builds a snappy, interactive UI.
-- **React Router** 🛤️: Smooth navigation between pages.
-- **React Hooks** 🪝: Manages state and lifecycle like a pro.
-- **React Forms** 📋: Handles login and data input effortlessly.
-- **JS (Async/Await, Fetch)** 🚀: Talks to the server with async magic.
-
-### 🖥️ Server-Side
-
-- **Node.js** 🟢: Powers our lightning-fast server.
-- **Express.js** 📡: Serves up a RESTful API with style.
-- **MySQL** 🗄️: Stores all the juicy data in relational tables.
-
-### 💾 Database
-
-- **MySQL** 🛢️: Structured tables for users, todos, posts, comments, and passwords, linked with foreign keys for max efficiency.
-
-## 📂 Project Structure
+## Project Structure
 
 ```
 social-media-platform/
-├── client/                    🌈 React client magic
+├── client/                    # React frontend
 │   ├── src/
-│   │   ├── components/        🧩 Reusable UI bits
-│   │   ├── App.js             🎨 Main React component
-│   │   └── index.js           🚪 Entry point
-├── server/                    ⚙️ Node.js/Express powerhouse
-│   ├── routes/                🛣️ API endpoints
-│   ├── controllers/        
-│   ├── service/           
-│   └── app.js              🔥 Main server file
-├── database/                  🗃️ MySQL scripts
-│   ├── createDB.js           🏗️ Table blueprints
-├── .gitignore                 🙈 Files to ignore
-└── README.md                  📖 You’re reading it!
+│   │   ├── components/        # Reusable React components
+│   │   ├── App.js             # Main app component
+│   │   └── index.js           # Entry point
+├── server/                    # Node.js/Express backend
+│   ├── routes/                # API routes
+│   ├── service/               # Database queries
+│   ├── controllers/           # Authentication logic
+│   └── server.js              # Server entry point
+├── database/                  # MySQL scripts
+│   ├── createDB.js            # Table definitions
+├── .gitignore                 # Ignored files
+└── README.md                  # This file
 ```
 
-## 🚀 Get Started in a Flash!
+## Setup Instructions
 
-### 🛠️ What You’ll Need
+### Prerequisites
 
-- **Node.js** (v16+): The engine for our server and client.
-- **MySQL** (v8+): Our data home.
-- **Git**: For cloning this repo.
-- **Postman**: To test API endpoints like a boss.
+- **Node.js** (v16+)
+- **MySQL** (v8+)
+- **Git**
+- **Postman** (for API testing)
 
-### ⚡ Installation Steps
+### Installation
 
 1. **Clone the Repo**:
 
    ```bash
-   git clone https://github.com/Sima-Shulman/Node.js-Server.git
-   cd NODE.JS-SERVER
+   git clone https://github.com/Sima-Shulman/Social-Media-Platform-with-Node.js-Server.git
+   cd Social-Media-Platform-with-Node.js-Server
    ```
 
-2. **Set Up the Database**:
+2. **Set Up MySQL**:
 
-   - Create a MySQL database:
+   - Create a database:
 
      ```bash
-     node createDB.js
+     node creatDB.js
      ```
 
-3. **Install Server Goodies**:
+3. **Install Server Dependencies**:
 
    ```bash
    cd server
    npm install
    ```
 
-4. **Install Client Goodies**:
+4. **Install Client Dependencies**:
 
    ```bash
    cd client
    npm install
    ```
 
-5. **Set Up Environment Variables**:
+5. **Configure Environment**:
 
-   - Create a `.env` file in the `server` folder:
+   - Create `server/.env`:
 
      ```
      DB_HOST=localhost
      DB_USER=your-username
      DB_PASSWORD=your-password
-     DB_NAME=MyDB
-     PORT=3000
+     DB_NAME=social_media_db
+     PORT=5000
      ```
 
-6. **Launch the App**:
+6. **Run the App**:
 
-   - Fire up the server:
+   - Start the server:
 
      ```bash
      cd server
-     node app.js
-     
+     npm start
      ```
-
-     Fire up the client:
+   - Start the client:
 
      ```bash
      cd client
-     npm run dev
+     npm start
      ```
 
-7. **Test the API**:
+7. **Test APIs**:
 
-   - Use Postman to hit endpoints like `GET /users` or `POST /todos`.
+   - Use Postman to test endpoints like `GET /users`.
 
-8. **Visit the App**:
+8. **Access the App**:
 
-   - Open `http://localhost:3000/login` in your browser and start exploring! 🌍
+   - Visit `http://localhost:3000/login` in your browser.
 
-## 🛠️ How We Built It
+## Development Notes
 
-- **Git Workflow**: We used Git branches for features, merging into `main` after testing. 🗂️
-- **Sprints**: Added features in phases—auth, todos, posts, and more!
-- **Code Organization**: Split into neat files for routes, queries, and components.
+- **Git**: We used branches for features, merging into `main` after testing.
+- **Sprints**: Built incrementally—login, todos, posts, and advanced queries.
+- **Testing**: APIs tested with Postman, UI tested in the browser.
